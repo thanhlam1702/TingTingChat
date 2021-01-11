@@ -17,6 +17,28 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Tên"
+        android:layout_marginTop="20dp"
+        android:id="@+id/name" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal">
+        <RadioButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            />
+        <RadioButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            />
+    </RadioGroup>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Mật khẩu"
         android:layout_marginTop="20dp"
         android:id="@+id/password" />
