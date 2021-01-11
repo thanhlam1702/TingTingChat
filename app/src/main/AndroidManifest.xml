@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tingting.com.tingtingchat">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TingTingChat">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Matches.MatchesActivity"></activity>
+        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".Register" />
         <activity android:name=".LoginRegister">
             <intent-filter>
