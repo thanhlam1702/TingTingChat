@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "114525415288",
+    "project_id": "tingting-chat",
+    "storage_bucket": "tingting-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114525415288:android:46efaf9f18cc7a5e2bca8d",
+        "android_client_info": {
+          "package_name": "tingting.com.tingtingchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114525415288-37bfg26jj6bemg9v4mopr1ou5hjscqmk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tingting.com.tingtingchat",
+            "certificate_hash": "0f214979fc4a0e0ac9fe7dd2c76dd2204e466e0f"
+          }
+        },
+        {
+          "client_id": "114525415288-leaet9um0bo7cjmt4afpk0b55qvpugbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0Yxj89ddL_s_MOrGd9PmgoMo7Gn5-NTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114525415288-leaet9um0bo7cjmt4afpk0b55qvpugbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
