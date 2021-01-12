@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:backgroundTint="@color/main"
         android:id="@+id/email" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-
+        android:backgroundTint="@color/main"
         android:hint="Mật khẩu"
         android:id="@+id/password" />
     <LinearLayout
@@ -29,6 +30,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/main"
             android:text="Đăng nhập"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
@@ -49,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký ngay"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/main"
             android:textSize="14dp"
             android:layout_marginLeft="10dp" />
     </LinearLayout>

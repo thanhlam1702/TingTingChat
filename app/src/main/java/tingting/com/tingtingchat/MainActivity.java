@@ -1,5 +1,6 @@
 package tingting.com.tingtingchat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -68,16 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(oppositeUserSex).child(userId).child("connections").child("nope").child(currentUId).setValue(true);
+
                 Toast.makeText(MainActivity.this, "Left", Toast.LENGTH_SHORT).show();
-                String userId = dataObject.toString();
-                usersDb.child(userId).child("connections").child("nope").child(currentUId).setValue(true);
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                cards obj = (cards) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(oppositeUserSex).child(userId).child("connections").child("yeps").child(currentUId).setValue(true);
+                isConnectionMatch(userId);
                 Toast.makeText(MainActivity.this, "Right", Toast.LENGTH_SHORT).show();
-                String userId = dataObject.toString();
-                usersDb.child(userId).child("connections").child("Yeps").child(currentUId).setValue(true);
             }
 
             @Override
@@ -100,6 +106,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void isConnectionMatch(String userId) {
+        DatabaseReference currentUserConnectionsDb = usersDb.child(userSex).child(currentUId).child("connections").child("yeps").child(userId);
+        currentUserConnectionsDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    Toast.makeText(MainActivity.this, "Bạn có liên kết mới", Toast.LENGTH_LONG).show();
+                    usersDb.child(oppositeUserSex).child(snapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
+                    usersDb.child(userSex).child(currentUId).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private String userSex;
     private String oppositeUserSex;
 
@@ -113,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.getKey().equals(user.getUid())){
                     userSex = "Male";
                     oppositeUserSex = "Female";
-                    usersDb = usersDb.child(oppositeUserSex);
+//                    usersDb = usersDb.child(oppositeUserSex);
                     getOppositeSexUsers();
                 }
             }
@@ -139,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.getKey().equals(user.getUid())){
                     userSex = "Female";
                     oppositeUserSex = "Male";
-                    usersDb = usersDb.child(oppositeUserSex);
+//                    usersDb = usersDb.child(oppositeUserSex);
                     getOppositeSexUsers();
                 }
             }
@@ -164,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         oppositeSexDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId)  && !dataSnapshot.child("connections").child("yeps").hasChild(currentUId)){
                     cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
@@ -194,5 +218,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
         return;
     }
+    public void setting(View view) {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        intent.putExtra("userSex", userSex);
+        startActivity(intent);
+        finish();
+        return;
+    }
+
 
 }
